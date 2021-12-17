@@ -1,0 +1,27 @@
+name: CI/CD 
+
+on:
+ # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master, development ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2 #this installs node and npm for us
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run lint
