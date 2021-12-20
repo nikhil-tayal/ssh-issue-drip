@@ -19,11 +19,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Private actions checkout
-      uses: daspn/private-actions-checkout@v2
+      uses: webfactory/ssh-agent@v0.5.4
       with:
-        # actions_list: '["https://github.com/dripcapital/vue-tour.git"]'
-        # checkout_base_path: ./.github/actions
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2 #this installs node and npm for us
       with:
